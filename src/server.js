@@ -7,6 +7,7 @@
 import express from 'express'
 import { router } from './routes/router.js'
 import { container } from './config/bootstrap.js'
+import { connectToDatabase } from './config/mongoose.js'
 
 const app = express()
 
@@ -18,6 +19,8 @@ try {
 
   // Set IoC container
   app.set('container', container)
+
+  app.set(await connectToDatabase(process.env.DB_CONNECTION_STRING))
 
   // Middleware to be executed before routes
   app.use((req, res, next) => {
@@ -53,7 +56,7 @@ try {
   })
 
   const server = app.listen(process.env.PORT, () => {
-    console.log(`Server running at http://localhost:${server.address().port}`)
+    console.log(`Server running at http://localhost:${server.address().port}/api/v1`)
     console.log('Press Ctrl-C to terminate...')
   })
 } catch (error) {

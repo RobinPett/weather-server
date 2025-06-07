@@ -21,6 +21,7 @@
     "http-errors": "^2.0.0",
     "jose": "^6.0.8",
     "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.15.1",
     "mqtt": "^5.13.1"
   },
   "devDependencies": {
