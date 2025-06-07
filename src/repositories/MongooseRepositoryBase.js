@@ -65,9 +65,8 @@ export class MongooseRepositoryBase {
    */
   async getById(id, projection = {}, options = {}) {
     try {
-      console.log('Id:', id)
       const document = await this.#model
-        .findOne(id, projection, options) // Not using default _id from mongoDB
+        .findById(id, projection, options)
         .exec()
 
         if (!document) {
