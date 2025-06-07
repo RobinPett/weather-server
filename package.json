@@ -20,7 +20,8 @@
     "express-session": "^1.18.1",
     "http-errors": "^2.0.0",
     "jose": "^6.0.8",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "mqtt": "^5.13.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
