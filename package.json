@@ -1,0 +1,31 @@
+{
+  "name": "assignment-wt1-oauth",
+  "version": "1.0.0",
+  "description": "In modern web applications, the ability to delegate access between systems is crucial. One widely used standard for access delegation is OAuth (Open Authorization). Although the OAuth flow may appear complex at first glance, it is important to understand the roles and communication of the different stakeholders (client/consumer/service provider) involved.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --env-file=.env src/server.js",
+    "lint": "npx eslint ./src || exit 0",
+    "lint:fix": "npx eslint ./src --fix || exit 0"
+  },
+  "author": "Robin Pettersson",
+  "license": "ISC",
+  "dependencies": {
+    "connect-mongo": "^5.1.0",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.18.1",
+    "http-errors": "^2.0.0",
+    "jose": "^6.0.8",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.22.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-jsdoc": "^50.6.6",
+    "nodemon": "^3.1.9"
+  }
+}
