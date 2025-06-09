@@ -22,8 +22,8 @@ export class SensorController {
    * Subscribes to all sensor topics.
    * @param {Function} callback - The callback function to handle incoming messages.
    */
-  subscribeToAll(callback) {
-      this._mqttService.subscribeToAll(callback)
+  async subscribeToAll(callback) {
+      await this._mqttService.subscribeToAll(callback)
   }
 
   /**
