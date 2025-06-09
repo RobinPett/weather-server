@@ -12,6 +12,7 @@ const schema = new mongoose.Schema({
   temperature: { type: Number, required: true, min: -100, max: 100 },
   humidity: { type: Number, required: true, min: 0, max: 100 },
   sensorId: { type: String, unique: true },
+  createdAt: { type: Date, default: Date.now, expires: '30d' }
 })
 
 schema.add(BASE_SCHEMA)
