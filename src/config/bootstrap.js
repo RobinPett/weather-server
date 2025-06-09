@@ -1,15 +1,16 @@
 import { IoCContainer } from '../lib/IoCContainer.js'
 
+import { MQTTListener } from '../lib/MQTTListener.js'
+import { MQTTRepository } from '../repositories/MQTTRepository.js'
+import { MQTTService } from '../services/MQTTService.js'
+import { SensorController } from '../controllers/SensorController.js'
+
 const iocContainer = new IoCContainer()
 
-// // Profile Modules
-// iocContainer.register('ProfileRepositorySingleton', ProfileRepository, { singleton: true })
-// iocContainer.register('ProfileServiceSingleton', ProfileService, { dependencies: ['ProfileRepositorySingleton'], singleton: true, })
-// iocContainer.register('ProfileController', ProfileController, { dependencies: ['ProfileServiceSingleton'], singleton: true })
-
-// // Auth Modules
-// iocContainer.register('AuthRepositorySingleton', AuthRepository, { singleton: true })
-// iocContainer.register('AuthServiceSingleton', AuthService, { dependencies: ['AuthRepositorySingleton', 'JsonWebToken'], singleton: true, })
-// iocContainer.register('AuthController', AuthController, { dependencies: ['AuthServiceSingleton'], singleton: true })
+// MQTT Modules
+iocContainer.register('MQTTListener', new MQTTListener(), { singleton: true })
+iocContainer.register('MQTTRepository', MQTTRepository, { dependencies: ['MQTTListener'], singleton: true })
+iocContainer.register('MQTTService', MQTTService, { dependencies: ['MQTTRepository'], singleton: true, })
+iocContainer.register('SensorController', SensorController, { dependencies: ['MQTTService'], singleton: true })
 
 export const container = Object.freeze(iocContainer)
