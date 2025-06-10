@@ -5,11 +5,11 @@
  */
 
 import express from 'express'
-import { router as sensorRouter } from './sensorRouter.js'
+import { router as measurementRouter } from './measurementRouter.js'
 
 export const router = new express.Router()
 
-router.use('/sensors', sensorRouter)
+router.use('/measurements', measurementRouter)
 
 router.use('/', (req, res) => {
   res.json({
