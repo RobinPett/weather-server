@@ -24,9 +24,12 @@ export class MeasurementController {
    * @param {string} data - The incoming data from the sensor.
    */
   handleSensorData(sensorType, data) {
-    // TODO: Implement the logic to handle the sensor data
-    // Save the data to the database, process it, etc.
-    // For now, we will just log the data
-      console.log(`Received ${sensorType} data:`, data)
+    this._measurementService.saveMeasurement(sensorType, data)
+    console.log(`Received ${sensorType} data:`, data)
+  }
+
+  getMeasurements(req, res) {
+    const measurements = this._measurementService.getMeasurements()
+    res.json(measurements)
   }
 }

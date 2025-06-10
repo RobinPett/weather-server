@@ -11,20 +11,12 @@ import { MongooseRepositoryBase } from './MongooseRepositoryBase.js'
  * Class representing a Measurement repository.
  */
 export class MeasurementRepository extends MongooseRepositoryBase {
-
-  /**
-   * The mongoose model
-   * 
-   * @type {mongoose.Model}
-   */
-  #model
-
   /**
    * Initializes the measurement repository.
    * @param {mongoose.Model} model  The mongoose model
    */
   constructor(model) {
+    console.log('Calling Base repository with model:', model.modelName)
     super(model)
-    this.#model = model
   }
 }

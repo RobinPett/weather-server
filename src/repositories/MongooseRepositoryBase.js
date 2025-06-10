@@ -94,7 +94,7 @@ export class MongooseRepositoryBase {
       return await this.#model.create(data)
     } catch (error) {
       if (error.code === 11000) {
-        throw new DuplicationError('Duplicate key error')
+        throw new DuplicationError('Duplicate key error' + JSON.stringify(error.keyValue))
       }
 
       if (error.name === 'ValidationError') {

@@ -11,5 +11,5 @@ export const router = new express.Router()
 router.use('/', async (req, res) => {
     console.log('Initializing measurement controller...')
     const measurementController = req.container.resolve('MeasurementController')
-    await measurementController.init(req, res)
+    await measurementController.getMeasurements(req, res)
 })

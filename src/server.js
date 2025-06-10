@@ -34,6 +34,10 @@ try {
     next()
   })
 
+  // Subscribe to all measurements
+  const measurementController = container.resolve('MeasurementController')
+  await measurementController.init()
+
   app.use('/', router)
 
   // Error handling
