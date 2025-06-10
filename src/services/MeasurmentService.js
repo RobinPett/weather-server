@@ -32,7 +32,7 @@ export class MeasurementService {
     }
 
     getMeasurements() {
-        return this._repository.getAll()
+        return this._repository.get()
     }
 
     async saveMeasurement(sensorType, data, sensorId = 'default') {

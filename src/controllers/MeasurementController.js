@@ -28,8 +28,7 @@ export class MeasurementController {
     console.log(`Received ${sensorType} data:`, data)
   }
 
-  getMeasurements(req, res) {
-    const measurements = this._measurementService.getMeasurements()
-    res.json(measurements)
+  async getMeasurements(req, res) {
+    return await this._measurementService.getMeasurements()
   }
 }
