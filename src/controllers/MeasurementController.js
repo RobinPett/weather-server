@@ -29,6 +29,15 @@ export class MeasurementController {
   }
 
   async getMeasurements(req, res) {
-    return await this._measurementService.getMeasurements()
+    const { page = 1, limit = 10 } = req.query
+    const filters = {}
+
+    try {
+      return await this._measurementService.getMeasurements({filters, page: parseInt(page, 10), limit: parseInt(limit, 10)})
+    } catch (error) {
+      console.error('Error fetching measurements:', error)
+      res.status(500).json({ error: error.message })
+      return
+    }
   }
 }

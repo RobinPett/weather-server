@@ -31,8 +31,9 @@ export class MeasurementService {
         })
     }
 
-    getMeasurements() {
-        return this._repository.get()
+    getMeasurements({filters = {}, page = 1, limit = 10} = {}) {
+        const skip = (page - 1) * limit
+        return this._repository.get(filters, {}, {limit, skip})
     }
 
     async saveMeasurement(sensorType, data, sensorId = 'default') {
