@@ -29,8 +29,14 @@ export class MeasurementController {
   }
 
   async getMeasurements(req, res) {
-    const { page = 1, limit = 10 } = req.query
+    const { page = 1, limit, from, to } = req.query
     const filters = {}
+
+    if (from || to) {
+      filters.createdAt = {}
+      if (from) filters.createdAt.$gte = new Date(from)
+      if (to) filters.createdAt.$lte = new Date(to)
+    }
 
     try {
       return await this._measurementService.getMeasurements({filters, page: parseInt(page, 10), limit: parseInt(limit, 10)})
