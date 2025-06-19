@@ -8,6 +8,7 @@ import express from 'express'
 import { router } from './routes/router.js'
 import { container } from './config/bootstrap.js'
 import { connectToDatabase } from './config/mongoose.js'
+import cors from 'cors'
 
 const app = express()
 
@@ -16,6 +17,10 @@ try {
   const baseURL = process.env.BASE_URL || '/'
 
   app.set('trust proxy', 1)
+
+  app.use(cors({
+    origin: process.env.CORS_ORIGIN || '*', // Allow all origins by default
+  }))
 
   // Set IoC container
   app.set('container', container)
