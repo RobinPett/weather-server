@@ -13,8 +13,8 @@ export class MeasurementService {
     _measurementBuffer = {}
 
     static topics = {
-        TEMPERATURE: "test/temperature",
-        HUMIDITY: "test/humidity",
+        TEMPERATURE: "rp222nc/temperature",
+        HUMIDITY: "rp222nc/humidity",
     }
 
     constructor(repository, mqttService) {

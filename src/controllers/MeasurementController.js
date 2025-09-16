@@ -11,7 +11,7 @@ export class MeasurementController {
   _measurementService
 
   constructor(measurementService) {
-      this._measurementService = measurementService
+    this._measurementService = measurementService
   }
 
   async init() {
@@ -24,8 +24,8 @@ export class MeasurementController {
    * @param {string} data - The incoming data from the sensor.
    */
   handleSensorData(sensorType, data) {
-    this._measurementService.saveMeasurement(sensorType, data)
     console.log(`Received ${sensorType} data:`, data)
+    this._measurementService.saveMeasurement(sensorType, data)
   }
 
   async getMeasurements(req, res) {
@@ -39,7 +39,7 @@ export class MeasurementController {
     }
 
     try {
-      const measurements = await this._measurementService.getMeasurements({filters, page: parseInt(page, 10), limit: parseInt(limit, 10)})
+      const measurements = await this._measurementService.getMeasurements({ filters, page: parseInt(page, 10), limit: parseInt(limit, 10) })
       return res.json(measurements)
     } catch (error) {
       console.error('Error fetching measurements:', error)

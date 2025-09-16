@@ -10,11 +10,6 @@
 export class MQTTService {
     _repository
 
-    static topics = {
-        TEMPERATURE: "test/temperature",
-        HUMIDITY: "test/humidity",
-    }
-
     constructor(repository) {
         this._repository = repository
     }

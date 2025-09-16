@@ -12,15 +12,20 @@ export class MQTTListener {
     constructor() {
         this.#brokerURL = process.env.MQTT_BROKER
         this.#clientId = process.env.MQTT_CLIENT_ID
-        this.#client = this.#createClient()
+        this._subscriptions = {};
+        this.#client = this.#createClient();
+        this.#client.on("message", (topic, message) => {
+            console.log(`[DEBUG] Message received on topic: ${topic} - ${message.toString()}`);
+            if (this._subscriptions[topic]) {
+                this._subscriptions[topic](message.toString());
+            }
+        });
         this.#connect()
     }
 
     #createClient() {
         return mqtt.connect(this.#brokerURL, {
             clientId: this.#clientId,
-            username: process.env.MQTT_USER,
-            password: process.env.MQTT_PASS,
         })
     }
 
@@ -53,17 +58,13 @@ export class MQTTListener {
     }
 
     subscribe(topic, callback) {
+        this._subscriptions[topic] = callback;
         this.#client.subscribe(topic, (err) => {
             if (err) {
-                console.error(`Failed to subscribe to topic ${topic}:`, err)
+                console.error(`Failed to subscribe to topic ${topic}:`, err);
             } else {
-                console.log(`Subscribed to topic ${topic}`)
-                this.#client.on("message", (receivedTopic, message) => {
-                    if (receivedTopic === topic) {
-                        callback(message.toString())
-                    }
-                })
+                console.log(`Subscribed to topic ${topic}`);
             }
-        })
+        });
     }
 }
