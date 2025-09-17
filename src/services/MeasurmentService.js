@@ -33,7 +33,16 @@ export class MeasurementService {
 
     getMeasurements({filters = {}, page = 1, limit = 10} = {}) {
         const skip = (page - 1) * limit
+
+        // Aggregate amount of measurements
         return this._repository.get(filters, {}, {limit, skip})
+    }
+
+    getAggregatedMeasurements({filters = {}, page = 1, limit = 10} = {}) {
+        const skip = (page - 1) * limit
+
+        // Aggregate hourly measurements
+        return this._repository.getAggregatedMeasurements(filters, { skip, limit, groupBy: 'hour' });
     }
 
     async saveMeasurement(sensorType, data, sensorId = 'default') {
