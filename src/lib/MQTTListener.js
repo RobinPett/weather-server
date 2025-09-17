@@ -15,7 +15,6 @@ export class MQTTListener {
         this._subscriptions = {};
         this.#client = this.#createClient();
         this.#client.on("message", (topic, message) => {
-            console.log(`[DEBUG] Message received on topic: ${topic} - ${message.toString()}`);
             if (this._subscriptions[topic]) {
                 this._subscriptions[topic](message.toString());
             }
