@@ -18,17 +18,11 @@ export class MeasurementRepository extends MongooseRepositoryBase {
    * @param {mongoose.Model} model  The mongoose model
    */
   constructor(model) {
-    console.log('Calling Base repository with model:', model.modelName)
+    console.log('Calling Measurement repository with model:', model.modelName)
     super(model)
     this.#model = model
   }
 
-    /**
-     * Get average temperature and humidity per hour.
-     * @param {object} filter - MongoDB filter for date range, sensorId, etc.
-     * @param {object} options - { skip, limit }
-     * @returns {Promise<object[]>}
-     */
     /**
      * Get aggregated measurements by groupBy (hour, day, etc).
      * @param {object} filter - MongoDB filter for date range, sensorId, etc.
@@ -70,8 +64,11 @@ export class MeasurementRepository extends MongooseRepositoryBase {
         pipeline.push({
           $group: {
             _id: groupId,
-            avgTemperature: { $avg: "$temperature" },
-            avgHumidity: { $avg: "$humidity" },
+            sensorId: { $first: "$sensorId" },
+            createdAt: { $first: "$createdAt" },
+            updatedAt: { $first: "$updatedAt" },
+            temperature: { $avg: "$temperature" },
+            humidity: { $avg: "$humidity" },
             count: { $sum: 1 }
           }
         });

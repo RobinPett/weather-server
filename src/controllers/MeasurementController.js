@@ -33,13 +33,15 @@ export class MeasurementController {
     const filters = {}
 
     if (from || to) {
+      const timeZone = 'Europe/Stockholm'
       filters.createdAt = {}
-      if (from) filters.createdAt.$gte = new Date(from)
-      if (to) filters.createdAt.$lte = new Date(to)
+      if (from) filters.createdAt.$gte = new Date(new Date(from).toLocaleString("en-US", { timeZone })) // Start of day
+      if (to) filters.createdAt.$lte = new Date(new Date(to).toLocaleString("en-US", { timeZone })).setHours(23, 59, 59, 999) // End of day
     }
 
     try {
-      const measurements = await this._measurementService.getMeasurements({ filters, page: parseInt(page, 10), limit: parseInt(limit, 10) })
+      const measurements = await this._measurementService.getAggregatedMeasurements({ filters, page: parseInt(page, 10), limit: parseInt(limit, 10), groupBy: 'hour' })
+      console.log('Fetched measurements:', measurements)
       return res.json(measurements)
     } catch (error) {
       console.error('Error fetching measurements:', error)
