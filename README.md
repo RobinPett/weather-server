@@ -1,4 +1,4 @@
-# Visby Weather App
+# Visby Weather App - SERVER
 
 ## Project Description
 
